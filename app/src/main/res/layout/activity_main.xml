@@ -62,6 +62,7 @@
 
     <TextView
         android:id="@+id/empty"
+        android:text="Type a keyword to get your book ;)"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
