@@ -57,9 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        searchbutton=findViewById(R.id.search);
-//        loading=findViewById(R.id.loading);
-//        loading.setVisibility(View.GONE);
+        searchbutton=findViewById(R.id.search);
+        loading=findViewById(R.id.loading);
+        loading.setVisibility(View.GONE);
 
 
     }
