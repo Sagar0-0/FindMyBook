@@ -28,7 +28,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ProgressBar loading;
-    private TextView emptyView;
     private TextView searchbutton;
     private BookAdapter mAdapter;
     private final String GOOGLE_BOOKS_HTTP_STRING="https://www.googleapis.com/books/v1/volumes?q=";
@@ -39,18 +38,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        searchbutton=findViewById(R.id.search);
-        loading=findViewById(R.id.loading);
-        loading.setVisibility(View.GONE);
-
         ListView bookListView =findViewById(R.id.list);
-
-        emptyView=findViewById(R.id.empty);
-        emptyView.setText("Type a keyword to get your book ;)");
-        bookListView.setEmptyView(emptyView);
 
         mAdapter=new BookAdapter(this, new ArrayList<Book>());
         bookListView.setAdapter(mAdapter);
+
+
 
         bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -64,32 +57,28 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        searchbutton=findViewById(R.id.search);
+        loading=findViewById(R.id.loading);
+        loading.setVisibility(View.GONE);
 
 
     }
 
-
-    @SuppressLint("SetTextI18n")
     public void searchbutton(View view){
-
+        String key;
         EditText text=findViewById(R.id.edittext);
-        String key=text.getText().toString();
-
+        key=text.getText().toString();
 
         ConnectivityManager cm=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info=cm.getActiveNetworkInfo();
-        if(info!=null && info.isConnected()){
-            searchbutton.setBackgroundResource(0);
-            loading.setVisibility(View.VISIBLE);
 
+        if(info!=null && info.isConnected()){
             BookAsyncTask task=new BookAsyncTask();
             String LOAD=GOOGLE_BOOKS_HTTP_STRING+"{"+key+"}";
             task.execute(LOAD);
-        }else{
-            loading.setVisibility(View.GONE);
-            searchbutton.setBackgroundResource(R.drawable.search);
 
-            emptyView.setText("NO INTERNET CONNECTION :(");
+            searchbutton.setBackgroundResource(0);
+            loading.setVisibility(View.VISIBLE);
         }
     }
 
@@ -98,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected List<Book> doInBackground(String... string) {
-            if(string[0]==null)return null;
+            if(string.length<1 || string[0]==null)return null;
             List<Book> result=QueryUtils.fetchBookData(string[0]);
             return result;
         }
@@ -109,11 +98,12 @@ public class MainActivity extends AppCompatActivity {
             searchbutton.setBackgroundResource(R.drawable.search);
 
             mAdapter.clear();
-            if(books!=null){
+            if(books!=null && !books.isEmpty()){
                 mAdapter.addAll(books);
             }
 
-            emptyView.setText("");
+            TextView textView = findViewById(R.id.empty);
+            textView.setVisibility(View.GONE);
         }
     }
 
