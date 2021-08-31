@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.util.List;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Picasso;
 
 
 
@@ -20,9 +19,8 @@ public class BookAdapter extends ArrayAdapter<Book> {
         super(context,0,books);
     }
 
-    @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, View convertView,ViewGroup parent) {
 
         Book currentBook=getItem(position);
         View listItemView=convertView;

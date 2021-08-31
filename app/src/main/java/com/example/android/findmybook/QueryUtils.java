@@ -1,5 +1,7 @@
 package com.example.android.findmybook;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,6 +22,8 @@ public class QueryUtils {
     public static final String LOG_TAG = QueryUtils.class.getSimpleName();
 
 
+    private QueryUtils() {
+    }
 
     public static List<Book> fetchBookData(String requestUrl) {
 
@@ -29,6 +33,7 @@ public class QueryUtils {
         try {
             jsonResponse = makeHttpRequest(url);
         } catch (IOException e) {
+            Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
         List<Book> books = extractFeaturesFromJson(jsonResponse);
 
@@ -41,6 +46,7 @@ public class QueryUtils {
         try {
             url = new URL(stringUrl);
         } catch (MalformedURLException e) {
+            Log.e(LOG_TAG, "Problem building the URL ", e);
         }
         return url;
     }
@@ -68,8 +74,10 @@ public class QueryUtils {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             } else {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
+            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -126,6 +134,7 @@ public class QueryUtils {
 
 
         } catch (JSONException e) {
+            Log.e("QueryUtils", "Problem parsing the Book JSON results", e);
         }
 
         return books;

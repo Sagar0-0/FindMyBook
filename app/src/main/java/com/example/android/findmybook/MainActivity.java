@@ -29,8 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
     private ProgressBar loading;
     private TextView searchbutton;
+
     private BookAdapter mAdapter;
-    private final String GOOGLE_BOOKS_HTTP_STRING="https://www.googleapis.com/books/v1/volumes?q=";
+    private static String GOOGLE_BOOKS_HTTP_STRING="https://www.googleapis.com/books/v1/volumes?q=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter=new BookAdapter(this, new ArrayList<Book>());
         bookListView.setAdapter(mAdapter);
-
-
 
         bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -103,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             TextView textView = findViewById(R.id.empty);
-            textView.setVisibility(View.GONE);
+            textView.setText("");
         }
     }
 
