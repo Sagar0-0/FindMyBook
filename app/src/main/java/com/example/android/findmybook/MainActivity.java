@@ -68,17 +68,13 @@ public class MainActivity extends AppCompatActivity {
         EditText text=findViewById(R.id.edittext);
         key=text.getText().toString();
 
-        ConnectivityManager cm=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info=cm.getActiveNetworkInfo();
+        BookAsyncTask task=new BookAsyncTask();
+        String LOAD=GOOGLE_BOOKS_HTTP_STRING+"{"+key+"}";
+        task.execute(LOAD);
 
-        if(info!=null && info.isConnected()){
-            BookAsyncTask task=new BookAsyncTask();
-            String LOAD=GOOGLE_BOOKS_HTTP_STRING+"{"+key+"}";
-            task.execute(LOAD);
+        searchbutton.setBackgroundResource(0);
+        loading.setVisibility(View.VISIBLE);
 
-            searchbutton.setBackgroundResource(0);
-            loading.setVisibility(View.VISIBLE);
-        }
     }
 
 
