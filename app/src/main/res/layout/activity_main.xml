@@ -12,14 +12,15 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/rectangle"
             android:layout_toLeftOf="@id/search"
-            android:layout_marginLeft="0dp"
+            android:layout_marginLeft="10dp"
             android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/searchboxx"
+            android:layout_height="120dp"
+            android:src="@drawable/searchboxxx"
             android:layout_centerInParent="true"/>
 
 
@@ -33,7 +34,7 @@
             android:maxLines="1"
             android:background="@android:color/transparent"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="27dp"
             android:padding="20dp"
             android:textSize="20dp" />
 
@@ -45,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:onClick="searchbutton"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="25dp"
             android:padding="20dp" />
 
 
@@ -54,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="36dp"
             android:layout_marginRight="20dp"/>
 
     </RelativeLayout>
@@ -64,8 +65,8 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="0dp"
-        android:layout_below="@id/header"/>
+        android:layout_below="@id/header"
+        android:dividerHeight="0dp" />
 
     <TextView
         android:id="@+id/empty"
