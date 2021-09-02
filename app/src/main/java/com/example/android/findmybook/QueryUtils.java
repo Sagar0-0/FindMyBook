@@ -1,6 +1,9 @@
 package com.example.android.findmybook;
 
+import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,15 +22,16 @@ import java.util.List;
 
 public class QueryUtils {
 
-    public static final String LOG_TAG = QueryUtils.class.getSimpleName();
+
+     public static final String LOG_TAG = QueryUtils.class.getSimpleName();
 
 
     private QueryUtils() {
     }
 
-    public static List<Book> fetchBookData(String requestUrl) {
+    public static List<Book> fetchBookData(String s) {
 
-        URL url = createUrl(requestUrl);
+        URL url = createUrl(s);
 
         String jsonResponse = null;
         try {
@@ -35,9 +39,8 @@ public class QueryUtils {
         } catch (IOException e) {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
-        List<Book> books = extractFeaturesFromJson(jsonResponse);
 
-        return books;
+        return extractFeaturesFromJson(jsonResponse);
     }
 
 
@@ -47,6 +50,7 @@ public class QueryUtils {
             url = new URL(stringUrl);
         } catch (MalformedURLException e) {
             Log.e(LOG_TAG, "Problem building the URL ", e);
+
         }
         return url;
     }
@@ -75,9 +79,15 @@ public class QueryUtils {
                 jsonResponse = readFromStream(inputStream);
             } else {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+                Toast.makeText(new MainActivity(),
+                        "WTF YOU JUST ENTERED",
+                        Toast.LENGTH_SHORT).show();
             }
         } catch (IOException e) {
             Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
+            Toast.makeText(new MainActivity(),
+                    "WTF YOU JUST ENTERED",
+                    Toast.LENGTH_SHORT).show();
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -102,6 +112,7 @@ public class QueryUtils {
         }
         return output.toString();
     }
+
     public static List<Book> extractFeaturesFromJson(String jsonResponse) {
         if(jsonResponse==null)return null;
 
@@ -141,8 +152,7 @@ public class QueryUtils {
     }
     public static String httpremoval(String httpurl){
         String[] httpsplit = httpurl.split("//");
-        String originallink ="https://"+httpsplit[1];
-        return originallink;
+        return "https://"+httpsplit[1];
     }
 
 
