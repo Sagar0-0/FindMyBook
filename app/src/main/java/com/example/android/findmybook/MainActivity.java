@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar loading;
     private TextView searchbutton;
     private ImageView emptyimg;
+    private TextView myName;
 
     private BookAdapter mAdapter;
     private final static String GOOGLE_BOOKS_HTTP_STRING="https://www.googleapis.com/books/v1/volumes?q=";
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         emptyimg=findViewById(R.id.emptyimg);
+        myName=findViewById(R.id.myname);
 
         ListView bookListView =findViewById(R.id.list);
 
@@ -104,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 emptyimg.setImageResource(R.drawable.nointernet);
                 Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
                 mAdapter.clear();
+                myName.setText("Github: Sagar0-0/FindMyBook");
             }
 
 
@@ -127,15 +130,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Book> books) {
             loading.setVisibility(View.GONE);
-            searchbutton.setBackgroundResource(R.drawable.search);
+            searchbutton.setBackgroundResource(R.drawable.gold);
 
             mAdapter.clear();
             if(books!=null && !books.isEmpty()){
                 mAdapter.addAll(books);
                 emptyimg.setImageResource(0);
+                myName.setText("");
             }else{
                 emptyimg.setImageResource(R.drawable.foundnothing);
                 Toast.makeText(MainActivity.this, "No such book found", Toast.LENGTH_SHORT).show();
+                myName.setText("Github: Sagar0-0/FindMyBook");
             }
 
         }
