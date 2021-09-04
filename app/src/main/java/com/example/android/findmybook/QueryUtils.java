@@ -79,15 +79,11 @@ public class QueryUtils {
                 jsonResponse = readFromStream(inputStream);
             } else {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
-                Toast.makeText(new MainActivity(),
-                        "WTF YOU JUST ENTERED",
-                        Toast.LENGTH_SHORT).show();
+
             }
         } catch (IOException e) {
             Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
-            Toast.makeText(new MainActivity(),
-                    "WTF YOU JUST ENTERED",
-                    Toast.LENGTH_SHORT).show();
+
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -121,26 +117,32 @@ public class QueryUtils {
             JSONObject root=new JSONObject(jsonResponse);
             JSONArray jsonArray=root.optJSONArray("items");
 
-            for(int i=0;i<jsonArray.length();i++){
-                JSONObject oneobject=jsonArray.getJSONObject(i);
+            if(jsonArray!=null) {
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject oneobject = jsonArray.getJSONObject(i);
 
-                JSONObject volumeinfo=oneobject.getJSONObject("volumeInfo");
+                    JSONObject volumeinfo = oneobject.getJSONObject("volumeInfo");
 
-                String bookname=volumeinfo.getString("title");
+                    String bookname = volumeinfo.getString("title");
 
-                JSONArray authorarray=volumeinfo.optJSONArray("authors");
-                String authorName=authorarray.getString(0);
+                    JSONArray authorarray = volumeinfo.optJSONArray("authors");
+                    String authorName = "Unknown Author";
+                    if (authorarray != null) {
+                        authorName = authorarray.getString(0);
+                    }
 
-                JSONObject imglinks=volumeinfo.getJSONObject("imageLinks");
-                String img=imglinks.getString("thumbnail");
-                String originalImg=httpremoval(img);
 
-                String lang=volumeinfo.getString("language");
+                    JSONObject imglinks = volumeinfo.getJSONObject("imageLinks");
+                    String img = imglinks.getString("thumbnail");
+                    String originalImg = httpremoval(img);
 
-                String infoLink=volumeinfo.getString("infoLink");
-                String bookurl=httpremoval(infoLink);
+                    String lang = volumeinfo.getString("language");
 
-                books.add(new Book(bookname,authorName,lang,originalImg,bookurl));
+                    String infoLink = volumeinfo.getString("infoLink");
+                    String bookurl = httpremoval(infoLink);
+
+                    books.add(new Book(bookname, authorName, lang, originalImg, bookurl));
+                }
             }
 
 
