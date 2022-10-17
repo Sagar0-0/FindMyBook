@@ -1,9 +1,6 @@
 package com.example.android.findmybook;
 
-import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +20,7 @@ import java.util.List;
 public class QueryUtils {
 
 
-     public static final String LOG_TAG = QueryUtils.class.getSimpleName();
+    public static final String LOG_TAG = QueryUtils.class.getSimpleName();
 
 
     private QueryUtils() {
@@ -110,14 +107,14 @@ public class QueryUtils {
     }
 
     public static List<Book> extractFeaturesFromJson(String jsonResponse) {
-        if(jsonResponse==null)return null;
+        if (jsonResponse == null) return null;
 
         List<Book> books = new ArrayList<>();
         try {
-            JSONObject root=new JSONObject(jsonResponse);
-            JSONArray jsonArray=root.optJSONArray("items");
+            JSONObject root = new JSONObject(jsonResponse);
+            JSONArray jsonArray = root.optJSONArray("items");
 
-            if(jsonArray!=null) {
+            if (jsonArray != null) {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject oneobject = jsonArray.getJSONObject(i);
 
@@ -152,9 +149,10 @@ public class QueryUtils {
 
         return books;
     }
-    public static String httpremoval(String httpurl){
+
+    public static String httpremoval(String httpurl) {
         String[] httpsplit = httpurl.split("//");
-        return "https://"+httpsplit[1];
+        return "https://" + httpsplit[1];
     }
 
 

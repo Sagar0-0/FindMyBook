@@ -1,21 +1,12 @@
 package com.example.android.findmybook;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.Loader;
-
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -25,6 +16,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView myName;
 
     private BookAdapter mAdapter;
-    private final static String GOOGLE_BOOKS_HTTP_STRING="https://www.googleapis.com/books/v1/volumes?q=";
+    private final static String GOOGLE_BOOKS_HTTP_STRING = "https://www.googleapis.com/books/v1/volumes?q=";
 
 
     @Override
@@ -46,34 +39,33 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        emptyimg=findViewById(R.id.emptyimg);
-        myName=findViewById(R.id.myname);
+        emptyimg = findViewById(R.id.emptyimg);
+        myName = findViewById(R.id.myname);
 
-        ListView bookListView =findViewById(R.id.list);
+        ListView bookListView = findViewById(R.id.list);
 
-        mAdapter=new BookAdapter(this, new ArrayList<Book>());
+        mAdapter = new BookAdapter(this, new ArrayList<Book>());
         bookListView.setAdapter(mAdapter);
 
         bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Book current=mAdapter.getItem(position);
+                Book current = mAdapter.getItem(position);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(current.getUrl()));
                 startActivity(browserIntent);
             }
         });
 
 
-
-        searchbutton=findViewById(R.id.search);
-        loading=findViewById(R.id.loading);
+        searchbutton = findViewById(R.id.search);
+        loading = findViewById(R.id.loading);
         loading.setVisibility(View.GONE);
 
 
     }
 
-    public void searchbutton(View view){
-        try{
+    public void searchbutton(View view) {
+        try {
 
             ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
@@ -83,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
                 String key = "";
                 EditText text = findViewById(R.id.edittext);
                 key = text.getText().toString();
-                if(key.isEmpty()){
+                if (key.isEmpty()) {
                     Toast.makeText(this, "Please enter some keyword first", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
 
                     BookAsyncTask task = new BookAsyncTask();
                     String LOAD = GOOGLE_BOOKS_HTTP_STRING + "{" + key + "}";
@@ -110,20 +102,18 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-
-
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
     }
 
 
-
-    private class BookAsyncTask extends AsyncTask<String,Void,List<Book>>{
+    private class BookAsyncTask extends AsyncTask<String, Void, List<Book>> {
 
         @Override
         protected List<Book> doInBackground(String... string) {
-            if(string.length<1 || string[0]==null)return null;
+            if (string.length < 1 || string[0] == null) return null;
 
-            List<Book> result=QueryUtils.fetchBookData(string[0]);
+            List<Book> result = QueryUtils.fetchBookData(string[0]);
             return result;
         }
 
@@ -133,11 +123,11 @@ public class MainActivity extends AppCompatActivity {
             searchbutton.setBackgroundResource(R.drawable.gold);
 
             mAdapter.clear();
-            if(books!=null && !books.isEmpty()){
+            if (books != null && !books.isEmpty()) {
                 mAdapter.addAll(books);
                 emptyimg.setImageResource(0);
                 myName.setText("");
-            }else{
+            } else {
                 emptyimg.setImageResource(R.drawable.foundnothing);
                 Toast.makeText(MainActivity.this, "No such book found", Toast.LENGTH_SHORT).show();
                 myName.setText("Github: Sagar0-0/FindMyBook");
@@ -145,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
 
 
 }

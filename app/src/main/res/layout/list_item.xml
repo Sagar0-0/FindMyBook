@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_margin="8dp"
+<LinearLayout android:layout_margin="8dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,27 +10,31 @@
         android:layout_width="0dp"
         android:layout_weight="1.5"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round"/>
+        android:src="@mipmap/ic_launcher_round" />
+
     <LinearLayout
         android:layout_gravity="center_vertical"
         android:layout_width="0dp"
         android:layout_weight="3"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/book_name"
             android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Android Application Development All-in-One For Dummies"/>
+            android:text="Android Application Development All-in-One For Dummies" />
+
         <TextView
             android:id="@+id/author_name"
             android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reto Meier"/>
+            android:text="Reto Meier" />
 
     </LinearLayout>
+
     <TextView
         android:id="@+id/language_view"
         android:layout_gravity="center"
@@ -39,5 +42,5 @@
         android:layout_weight="1"
         android:paddingLeft="16dp"
         android:layout_height="wrap_content"
-        android:text="EN"/>
+        android:text="EN" />
 </LinearLayout>

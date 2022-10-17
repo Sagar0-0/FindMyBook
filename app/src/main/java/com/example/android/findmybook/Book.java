@@ -7,12 +7,12 @@ public class Book {
     private String language;
     private String url;
 
-    public Book(String bookName,String authorName,String language,String image,String url){
-        this.image=image;
-        this.bookName=bookName;
-        this.authorName=authorName;
-        this.language=language;
-        this.url=url;
+    public Book(String bookName, String authorName, String language, String image, String url) {
+        this.image = image;
+        this.bookName = bookName;
+        this.authorName = authorName;
+        this.language = language;
+        this.url = url;
     }
 
     public String getImage() {
@@ -24,7 +24,7 @@ public class Book {
     }
 
     public String getAuthorName() {
-        return "By: "+ authorName;
+        return "By: " + authorName;
     }
 
     public String getLanguage() {
