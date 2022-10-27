@@ -1,16 +1,17 @@
 package com.example.android.findmybook
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.android.findmybook.databinding.ActivityMainBinding
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.datastore.core.DataStore
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding:ActivityMainBinding = DataBindingUtil.setContentView(this,R.layout.activity_main)
-        binding.booksRecyclerView.layoutManager = LinearLayoutManager(this)
+        setContent {
+
+        }
+
     }
 }

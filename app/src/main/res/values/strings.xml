@@ -3,4 +3,6 @@
     <string name="find_your_book_here">Find your book here..</string>
     <string name="search_background">Search Background</string>
     <string name="empty_image">Empty Image</string>
+    <string name="search_button">Search Button</string>
+    <string name="search">Search</string>
 </resources>

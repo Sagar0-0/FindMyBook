@@ -8,3 +8,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Find My Book"
 include ':app'
+include ':core:data'
+include ':core:network'
+include ':core:ui'
+include ':core:datastore'
