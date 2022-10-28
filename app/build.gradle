@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
+    id "com.google.protobuf" version "0.8.17"
 }
 
 android {
@@ -44,6 +45,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.core:core-ktx:1.9.0'
+    implementation project(path: ':core:datastore')
     testImplementation 'junit:junit:'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
@@ -71,4 +73,27 @@ dependencies {
 
     //jetpack datastore
     implementation "androidx.datastore:datastore-core:1.0.0"
+    // Starting from Protobuf 3.8.0, use the lite runtime library
+    implementation  "com.google.protobuf:protobuf-javalite:3.21.5"
+}
+
+protobuf {
+    // Configures the Protobuf compilation and the protoc executable
+    protoc {
+        // Downloads from the repositories
+        artifact = "com.google.protobuf:protoc:3.14.0"
+    }
+
+    // Generates the java Protobuf-lite code for the Protobufs in this project
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                // Configures the task output type
+                java {
+                    // Java Lite has smaller code size and is recommended for Android
+                    option 'lite'
+                }
+            }
+        }
+    }
 }
