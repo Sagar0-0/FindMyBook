@@ -30,11 +30,13 @@ class MainActivity : ComponentActivity() {
             Row {
                 val coroutineScope = rememberCoroutineScope()
                 val data = remember {
-                    mutableStateOf("SAGAR")
+                    mutableStateOf("")
                 }
                 Button(onClick = {
                     coroutineScope.launch {
                         addBookmark()
+
+                        //always use lifecycle.repeatOnLifecycle while collecting flows to avoid memory leaks
                         datastore.data.collect {
                             data.value=it.set.toString()
                         }
