@@ -2,7 +2,9 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
+    id 'kotlin-kapt'
     id "com.google.protobuf" version "0.8.17"
+    id "org.jetbrains.kotlin.plugin.serialization" version "1.7.20"
 }
 
 android {
@@ -67,33 +69,24 @@ dependencies {
     implementation 'androidx.activity:activity-compose:1.6.1'
     // Optional - Integration with ViewModels
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1'
-    // Optional - Integration with LiveData
-    implementation 'androidx.compose.runtime:runtime-livedata'
-
 
     //jetpack datastore
-    implementation "androidx.datastore:datastore-core:1.0.0"
+    implementation "androidx.datastore:datastore:1.0.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5"
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1'
+
     // Starting from Protobuf 3.8.0, use the lite runtime library
     implementation  "com.google.protobuf:protobuf-javalite:3.21.5"
-}
 
-protobuf {
-    // Configures the Protobuf compilation and the protoc executable
-    protoc {
-        // Downloads from the repositories
-        artifact = "com.google.protobuf:protoc:3.14.0"
-    }
+    // ViewModel
+    def lifecycle_version = "2.6.0-alpha03"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    // Annotation processor
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
-    // Generates the java Protobuf-lite code for the Protobufs in this project
-    generateProtoTasks {
-        all().each { task ->
-            task.builtins {
-                // Configures the task output type
-                java {
-                    // Java Lite has smaller code size and is recommended for Android
-                    option 'lite'
-                }
-            }
-        }
-    }
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 }
