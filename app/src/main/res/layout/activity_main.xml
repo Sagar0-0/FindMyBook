@@ -1,93 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical"-->
+<!--    tools:context=".MainActivity">-->
 
 
-    <RelativeLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/rectangle"
-            android:layout_alignParentLeft="true"
-            android:layout_width="wrap_content"
-            android:layout_height="140dp"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/circlebox"
-            android:layout_centerInParent="true"/>
-
-
-        <EditText
-            android:id="@+id/edittext"
-            android:inputType="textCapWords"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@id/search"
-            android:hint="Type your book here.."
-            android:maxLines="1"
-            android:background="@android:color/transparent"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="45dp"
-            android:padding="20dp"
-            android:textSize="20dp" />
-
-        <Button
-            android:id="@+id/search"
-            android:clickable="true"
-            android:background="@drawable/gold"
-            android:layout_width="60dp"
-            android:layout_marginRight="30dp"
-            android:layout_height="60dp"
-            android:layout_alignParentEnd="true"
-            android:onClick="searchbutton"
-            android:layout_marginTop="50dp"
-            android:padding="20dp" />
-
-
-        <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="59dp"
-            android:layout_marginRight="43dp"/>
-
-    </RelativeLayout>
-
-
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/header"
-        android:drawSelectorOnTop="true"
-        android:dividerHeight="0dp" />
-
-    <ImageView
-        android:id="@+id/emptyimg"
-        android:layout_width="270dp"
-        android:layout_height="270dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/penguin" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Github: Sagar0-0/FindMyBook"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:padding="12dp"
-        android:id="@+id/myname"/>
-
-
-
-
-</RelativeLayout>
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
