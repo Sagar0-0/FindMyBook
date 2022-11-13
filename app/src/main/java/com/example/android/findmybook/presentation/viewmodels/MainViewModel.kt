@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.findmybook.domain.model.Book
+import com.example.android.findmybook.network.model.Item
 import com.example.android.findmybook.repository.network.NetworkRepo_Impl
 import com.example.android.findmybook.repository.network.NetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +21,7 @@ class MainViewModel
 ) : ViewModel() {
 
     val searchTitle = savedStateHandle.getStateFlow("searchTitle", "")
-    private val _books = MutableStateFlow<List<Book>>(value = listOf())
+    private val _books = MutableStateFlow<List<Item>>(value = listOf())
     val books = _books.asStateFlow()
 
     fun getBooks(title: String) {
