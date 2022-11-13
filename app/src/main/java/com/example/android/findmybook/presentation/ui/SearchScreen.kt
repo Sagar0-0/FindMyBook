@@ -1,5 +1,6 @@
 package com.example.android.findmybook.presentation.ui
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.android.findmybook.viewmodels.MainViewModel
+import com.example.android.findmybook.presentation.viewmodels.MainViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -22,12 +23,11 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Composable
 @Destination
 fun SearchScreen(
-    navigator: DestinationsNavigator,
-    viewModel: MainViewModel ?=null
+    viewModel: MainViewModel = hiltViewModel()
 ) {
 
     var text by remember {
-        mutableStateOf("")
+        mutableStateOf(viewModel.searchTitle.value)
     }
     Column(
         verticalArrangement = Arrangement.Center,
@@ -46,14 +46,14 @@ fun SearchScreen(
 
         Button(
             onClick = {
-                viewModel?.getBooks(text)
+                viewModel.getBooks(text)
             },
             modifier = Modifier.align(Alignment.End)
         ) {
             Text(text = "SHOW RESULT")
         }
 
-        val books by viewModel?.books!!.collectAsState()
+        val books by viewModel.books.collectAsState()
         LazyColumn(modifier = Modifier.fillMaxHeight()){
             items(items = books, itemContent = {item->
                 Text(text = item.title)

@@ -4,25 +4,25 @@ import com.example.android.findmybook.domain.model.Book
 import com.example.android.findmybook.domain.util.DomainMapper
 
 class BookDtoMapper:DomainMapper<BookDTO,Book> {
-    override fun mapToDomainModel(bookDTO: BookDTO): Book {
+    override fun mapToDomainModel(entity: BookDTO): Book {
         return Book(
-            id=bookDTO.id,
-            selfLink = bookDTO.selfLink,
-            title=bookDTO.volumeInfo.title,
-            authors=bookDTO.volumeInfo.authors,
-            publisher=bookDTO.volumeInfo.publisher,
-            publishedDate=bookDTO.volumeInfo.publishedDate,
-            description=bookDTO.volumeInfo.description,
-            pageCount=bookDTO.volumeInfo.pageCount,
-            categories=bookDTO.volumeInfo.categories,
-            imageLink=bookDTO.volumeInfo.imageLinks.thumbnail,
-            language=bookDTO.volumeInfo.language,
-            previewLink=bookDTO.volumeInfo.previewLink
+            id=entity.id,
+            selfLink = entity.selfLink,
+            title=entity.volumeInfo.title,
+            authors=entity.volumeInfo.authors,
+            publisher=entity.volumeInfo.publisher,
+            publishedDate=entity.volumeInfo.publishedDate,
+            description=entity.volumeInfo.description,
+            pageCount=entity.volumeInfo.pageCount,
+            categories=entity.volumeInfo.categories,
+            imageLink=entity.volumeInfo.imageLinks.thumbnail,
+            language=entity.volumeInfo.language,
+            previewLink=entity.volumeInfo.previewLink
         )
     }
 
     override fun mapFromDomainModel(domainModel: Book): BookDTO {
-        TODO("Not yet implemented")
+        TODO("Not needed")
     }
 
     fun toDomainList(initial: List<BookDTO>): List<Book> {
