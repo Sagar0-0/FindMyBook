@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface NetworkService {
 
-    @GET("/volumes")
+    @GET("volumes")
     suspend fun searchBookByTitle(
         @Query("q") bookName:String
     ): Response<BookSearchResponse>
