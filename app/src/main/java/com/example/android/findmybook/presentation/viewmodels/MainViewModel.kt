@@ -21,7 +21,7 @@ class MainViewModel
 ) : ViewModel() {
 
     val searchTitle = savedStateHandle.getStateFlow("searchTitle", "")
-    private val _books = MutableStateFlow<List<Item>>(value = listOf())
+    private val _books = MutableStateFlow<List<Book>>(value = listOf())
     val books = _books.asStateFlow()
 
     fun getBooks(title: String) {

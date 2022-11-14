@@ -1,5 +1,6 @@
 package com.example.android.findmybook.repository.network
 
+import com.example.android.findmybook.domain.model.Book
 import com.example.android.findmybook.network.NetworkService
 import com.example.android.findmybook.network.mapper.BookDtoMapper
 import com.example.android.findmybook.network.model.Item
@@ -10,11 +11,11 @@ class NetworkRepo_Impl @Inject constructor(
     private val mapper: BookDtoMapper
 ) : NetworkRepository {
 
-    override suspend fun searchBookByTitle(title: String): List<Item> {
+    override suspend fun searchBookByTitle(title: String): List<Book> {
         return if (api.searchBookByTitle(title).isSuccessful
             && api.searchBookByTitle(title).body() != null
             && api.searchBookByTitle(title).body()!!.totalItems>0) {
-            api.searchBookByTitle(title).body()!!.items
+            mapper.toDomainList(api.searchBookByTitle(title).body()!!.items)
         } else {
             listOf()
         }

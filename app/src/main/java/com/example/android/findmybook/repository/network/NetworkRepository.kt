@@ -1,7 +1,8 @@
 package com.example.android.findmybook.repository.network
 
-import com.example.android.findmybook.network.model.Item
+import com.example.android.findmybook.domain.model.Book
+
 
 interface NetworkRepository {
-    suspend fun searchBookByTitle(title: String): List<Item>
+    suspend fun searchBookByTitle(title: String): List<Book>
 }

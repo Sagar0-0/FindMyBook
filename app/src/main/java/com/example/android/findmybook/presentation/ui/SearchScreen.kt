@@ -1,7 +1,5 @@
 package com.example.android.findmybook.presentation.ui
 
-import android.util.Log
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -12,15 +10,11 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.android.findmybook.presentation.viewmodels.MainViewModel
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,17 +27,20 @@ fun SearchScreen(
         mutableStateOf(viewModel.searchTitle.value)
     }
     Column(
-        verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 50.dp)
     ) {
         TextField(
             value = text,
             onValueChange = {
                 text = it
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    start = 10.dp,
+                    end = 10.dp
+                )
         )
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -51,26 +48,36 @@ fun SearchScreen(
             onClick = {
                 viewModel.getBooks(text)
             },
-            modifier = Modifier.align(Alignment.End)
+            modifier = Modifier
+                .align(Alignment.End)
+                .padding(end = 10.dp)
         ) {
             Text(text = "SHOW RESULT")
         }
 
         val books by viewModel.books.collectAsState()
-        if(books.isNotEmpty()){
-            LazyColumn(modifier = Modifier.fillMaxHeight()){
-                items(items = books, itemContent = {item->
-                    Text(text = item.volumeInfo.title)
-                    Spacer(modifier = Modifier
-                        .height(5.dp)
-                        .background(color = Color.Red))
+        if (books.isNotEmpty()) {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(
+                        start = 10.dp,
+                        end = 10.dp
+                    )
+            ) {
+                items(items = books, itemContent = { item ->
+                    BookItem(item)
+                    Spacer(modifier = Modifier.padding(10.dp))
                 })
             }
-        }else{
-            Text(text = "NO RESULT FOUND!!!",
-            fontSize = 30.sp
+        } else {
+            Text(
+                text = "NO RESULT FOUND!!!",
+                fontSize = 30.sp
             )
         }
-
     }
+
 }
+
+
