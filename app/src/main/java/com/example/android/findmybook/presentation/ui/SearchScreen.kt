@@ -71,6 +71,7 @@ fun SearchScreen(
 
         Button(
             onClick = {
+                focusManager.clearFocus()
                 onExecuteSearch(viewModel,text)
             },
             modifier = Modifier
