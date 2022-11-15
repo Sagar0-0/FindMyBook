@@ -66,6 +66,7 @@ fun SearchScreen(
             }),
             textStyle = TextStyle(color = MaterialTheme.colorScheme.onSurface)
         )
+
         Spacer(modifier = Modifier.height(8.dp))
 
         Button(
