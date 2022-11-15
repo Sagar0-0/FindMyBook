@@ -3,16 +3,10 @@ package com.example.android.findmybook.presentation.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.indication
-import androidx.compose.foundation.interaction.Interaction
-import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,33 +20,37 @@ import com.example.android.findmybook.R
 import com.example.android.findmybook.domain.model.Book
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookItem(book: Book) {
     val customCardElevation = CardDefaults.cardElevation(
         defaultElevation = 10.dp
     )
     Card(
-        shape = MaterialTheme.shapes.medium,
+        shape = MaterialTheme.shapes.extraLarge,
         modifier = Modifier
-            .fillMaxWidth()
-            .clickable {
-                showApp()
-            },
-        elevation = customCardElevation
+            .fillMaxWidth(),
+        elevation = customCardElevation,
+        onClick = {showApp()}
     ) {
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp)) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.bookicon),
                 contentDescription = "",
                 modifier = Modifier
-                    .size(50.dp)
+                    .size(60.dp)
                     .fillMaxWidth(0.1f)
+                    .padding(end = 5.dp)
             )
             Column(
                 verticalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.fillMaxWidth(0.9f)
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
             ) {
                 Text(
                     text = book.title,
@@ -71,14 +69,14 @@ fun BookItem(book: Book) {
                 painter = painterResource(id = imageId.value),
                 contentDescription = "",
                 modifier = Modifier
-                    .align(Alignment.CenterVertically)
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
-                        indication = rememberRipple(bounded = false)) {
-                        if(imageId.value==R.drawable.ic_baseline_bookmark_border_24){
-                            imageId.value=R.drawable.ic_baseline_bookmark_24
-                        }else{
-                            imageId.value=R.drawable.ic_baseline_bookmark_border_24
+                        indication = rememberRipple(bounded = false, radius = 16.dp)
+                    ) {
+                        if (imageId.value == R.drawable.ic_baseline_bookmark_border_24) {
+                            imageId.value = R.drawable.ic_baseline_bookmark_24
+                        } else {
+                            imageId.value = R.drawable.ic_baseline_bookmark_border_24
                         }
                     }
             )
