@@ -31,7 +31,7 @@ fun BookItem(book: Book) {
         modifier = Modifier
             .fillMaxWidth(),
         elevation = customCardElevation,
-        onClick = {showApp()}
+        onClick = { showApp() }
     ) {
         Row(
             modifier = Modifier

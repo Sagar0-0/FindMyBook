@@ -1,4 +1,4 @@
-package com.example.android.findmybook.network.model
+package com.example.android.findmybook.data.remote.model
 
 data class Pdf(
     val acsTokenLink: String,

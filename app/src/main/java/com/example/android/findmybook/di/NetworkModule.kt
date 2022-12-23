@@ -1,7 +1,8 @@
 package com.example.android.findmybook.di
 
-import com.example.android.findmybook.network.NetworkService
-import com.example.android.findmybook.network.mapper.BookDtoMapper
+import com.example.android.findmybook.data.remote.NetworkService
+import com.example.android.findmybook.data.remote.mapper.BookDtoMapper
+import com.example.android.findmybook.others.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,10 +23,10 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun providesBookService():NetworkService{
+    fun providesBookApi(): NetworkService {
         return Retrofit.Builder()
-            .baseUrl("https://www.googleapis.com/books/v1/")
             .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
             .build()
             .create(NetworkService::class.java)
     }

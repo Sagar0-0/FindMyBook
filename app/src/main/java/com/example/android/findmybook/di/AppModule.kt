@@ -1,7 +1,10 @@
 package com.example.android.findmybook.di
 
 import android.content.Context
-import com.example.android.findmybook.presentation.BaseApplication
+import androidx.room.Room
+import com.example.android.findmybook.BaseApplication
+import com.example.android.findmybook.data.local.BookDatabase
+import com.example.android.findmybook.others.Constants.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,7 +1,7 @@
 package com.example.android.findmybook.di
 
-import com.example.android.findmybook.repository.network.NetworkRepo_Impl
-import com.example.android.findmybook.repository.network.NetworkRepository
+import com.example.android.findmybook.repository.BooksRepo_Impl
+import com.example.android.findmybook.repository.BooksRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,6 +15,6 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindMyRepo(
-        networkrepoImpl: NetworkRepo_Impl
-    ): NetworkRepository
+        networkrepoImpl: BooksRepo_Impl
+    ): BooksRepository
 }

@@ -11,10 +11,8 @@ import androidx.compose.ui.platform.LocalContext
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.example.android.findmybook.R
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-const val DEFAULT_RECIPE_IMAGE = R.drawable.ic_baseline_search_24
 @ExperimentalCoroutinesApi
 @Composable
 fun loadPicture(url: String, @DrawableRes defaultImage: Int): MutableState<Bitmap?> {
@@ -28,7 +26,7 @@ fun loadPicture(url: String, @DrawableRes defaultImage: Int): MutableState<Bitma
         .asBitmap()
         .load(defaultImage)
         .into(object : CustomTarget<Bitmap>() {
-            override fun onLoadCleared(placeholder: Drawable?) { }
+            override fun onLoadCleared(placeholder: Drawable?) {}
             override fun onResourceReady(
                 resource: Bitmap,
                 transition: Transition<in Bitmap>?
@@ -42,7 +40,7 @@ fun loadPicture(url: String, @DrawableRes defaultImage: Int): MutableState<Bitma
         .asBitmap()
         .load(url)
         .into(object : CustomTarget<Bitmap>() {
-            override fun onLoadCleared(placeholder: Drawable?) { }
+            override fun onLoadCleared(placeholder: Drawable?) {}
             override fun onResourceReady(
                 resource: Bitmap,
                 transition: Transition<in Bitmap>?
