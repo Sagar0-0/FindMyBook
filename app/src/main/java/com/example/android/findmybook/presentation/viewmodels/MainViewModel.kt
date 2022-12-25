@@ -23,8 +23,8 @@ class MainViewModel
 
     val searchTitle = savedStateHandle.getStateFlow("searchTitle", "")
 
-    private val _books = MutableLiveData<Event<Resource<BookSearchResponse>>>()
-    val books: LiveData<Event<Resource<BookSearchResponse>>> = _books
+    private val _books = MutableLiveData<Resource<BookSearchResponse>>()
+    val books: LiveData<Resource<BookSearchResponse>> = _books
 
     fun removeBookFromDB(bookEntity: BookEntity) = viewModelScope.launch {
         repository.removeBookItem(bookEntity)
@@ -37,17 +37,14 @@ class MainViewModel
 
     fun searchBookByTitle(bookName: String) {
         if(bookName.isEmpty()){
-            _books.postValue(Event(Resource.error("The title must not be empty",null)))
-            return
+            _books.postValue(Resource.error("The title must not be empty",null))
         }else if(bookName.length>Constants.MAX_BOOK_TITLE_LENGTH){
-            _books.postValue(Event(Resource.error("The title length must not exceed ${Constants.MAX_BOOK_TITLE_LENGTH} size",null)))
-            return
+            _books.postValue(Resource.error("The title length must not exceed ${Constants.MAX_BOOK_TITLE_LENGTH} size",null))
         }else{
-            _books.value = Event(Resource.loading(null))
+            _books.value = Resource.loading(null)
             savedStateHandle["searchTitle"] = bookName
             viewModelScope.launch {
-                val response = repository.searchBookByTitle(bookName)
-                _books.value = Event(response)
+                _books.value = repository.searchBookByTitle(bookName)
             }
         }
 

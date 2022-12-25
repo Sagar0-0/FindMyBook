@@ -35,7 +35,7 @@ fun loadPicture(url: String, @DrawableRes defaultImage: Int): MutableState<Bitma
             }
         })
 
-    // get recipe image
+    // get image
     Glide.with(LocalContext.current)
         .asBitmap()
         .load(url)

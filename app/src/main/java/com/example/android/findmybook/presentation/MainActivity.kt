@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                 startDestination = HOME_SCREEN // start destination variable needs to match one of the composable screen routes below
             ) {
                 composable(route = HOME_SCREEN) { HomeScreen(navController) }
-                composable(route = SEARCH_SCREEN) { SearchScreen(navController) }
+                composable(route = SEARCH_SCREEN) { SearchScreen() }
             }
         }
     }

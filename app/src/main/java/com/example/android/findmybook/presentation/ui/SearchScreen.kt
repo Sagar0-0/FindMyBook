@@ -1,16 +1,17 @@
 package com.example.android.findmybook.presentation.ui
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
@@ -19,13 +20,12 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
+import com.example.android.findmybook.others.Status
 import com.example.android.findmybook.presentation.viewmodels.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen(
-    navController: NavController,
     viewModel: MainViewModel = hiltViewModel()
 ) {
     val focusManager: FocusManager = LocalFocusManager.current
@@ -79,27 +79,35 @@ fun SearchScreen(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-//        val books by viewModel.books.collectAsState()
-//        if (books.isNotEmpty()) {
-//            LazyColumn(
-//                modifier = Modifier
-//                    .fillMaxHeight()
-//                    .padding(
-//                        start = 10.dp,
-//                        end = 10.dp
-//                    )
-//            ) {
-//                items(items = books, itemContent = { item ->
-//                    BookItem(item)
-//                    Spacer(modifier = Modifier.padding(10.dp))
-//                })
-//            }
-//        } else {
-//            Text(
-//                text = "NO RESULT FOUND!!!",
-//                fontSize = 30.sp
-//            )
-//        }
+        val resource by viewModel.books.observeAsState()
+        when (resource?.status) {
+            Status.SUCCESS -> {
+                val books = resource?.data?.items!!
+                LazyColumn(
+                    state = rememberLazyListState(),
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(
+                            start = 10.dp,
+                            end = 10.dp
+                        )
+                ) {
+                    items(items = books, itemContent = { item ->
+                        BookItem(item)
+                        Spacer(modifier = Modifier.padding(10.dp))
+                    })
+                }
+            }
+            Status.LOADING -> {
+                Text(text = "Loading...")
+            }
+            Status.ERROR -> {
+                resource!!.message?.let { Text(text = it) }
+            }
+            else -> {
+                Text(text = "Search for your favourite books here")
+            }
+        }
     }
 }
 

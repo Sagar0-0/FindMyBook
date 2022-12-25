@@ -11,8 +11,7 @@ import javax.inject.Inject
 
 class BooksRepo_Impl @Inject constructor(
     private val bookDao: BookDao,
-    private val booksApi: NetworkService,
-    private val mapper: BookDtoMapper
+    private val booksApi: NetworkService
 ) : BooksRepository {
 
     override suspend fun saveBookItem(book: BookEntity) {
@@ -33,12 +32,12 @@ class BooksRepo_Impl @Inject constructor(
             if(response.isSuccessful){
                 response.body()?.let {
                     Resource.success(it)
-                } ?: Resource.error("Unknown error",null)
+                } ?: Resource.error("Response body null",null)
             }else{
-                Resource.error("Not successfull response",null)
+                Resource.error("Not successfully response",null)
             }
         } catch (e:Exception){
-            Resource.error("Couln't reach server. Check Internet",null)
+            Resource.error("Some exception occurred ${e.cause}",null)
         }
     }
 
