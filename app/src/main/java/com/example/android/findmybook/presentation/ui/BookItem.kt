@@ -62,7 +62,7 @@ fun BookItem(book: Item) {
                     fontWeight = FontWeight.ExtraBold
                 )
                 Text(
-                    text = book.volumeInfo.authors[0],
+                    text = book.volumeInfo?.authors?.get(0) ?:"Unknown",
                     fontSize = 14.sp
                 )
             }

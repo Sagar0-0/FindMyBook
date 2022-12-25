@@ -82,20 +82,24 @@ fun SearchScreen(
         val resource by viewModel.books.observeAsState()
         when (resource?.status) {
             Status.SUCCESS -> {
-                val books = resource?.data?.items!!
-                LazyColumn(
-                    state = rememberLazyListState(),
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .padding(
-                            start = 10.dp,
-                            end = 10.dp
-                        )
-                ) {
-                    items(items = books, itemContent = { item ->
-                        BookItem(item)
-                        Spacer(modifier = Modifier.padding(10.dp))
-                    })
+                val books = resource?.data?.items
+                if(books.isNullOrEmpty()){
+                    Text(text = "No data found")
+                }else{
+                    LazyColumn(
+                        state = rememberLazyListState(),
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .padding(
+                                start = 10.dp,
+                                end = 10.dp
+                            )
+                    ) {
+                        items(items = books, itemContent = { item ->
+                            BookItem(item)
+                            Spacer(modifier = Modifier.padding(10.dp))
+                        })
+                    }
                 }
             }
             Status.LOADING -> {
