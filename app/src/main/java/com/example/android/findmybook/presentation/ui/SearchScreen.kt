@@ -9,9 +9,13 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
@@ -83,9 +87,9 @@ fun SearchScreen(
         when (resource?.status) {
             Status.SUCCESS -> {
                 val books = resource?.data?.items
-                if(books.isNullOrEmpty()){
+                if (books.isNullOrEmpty()) {
                     Text(text = "No data found")
-                }else{
+                } else {
                     LazyColumn(
                         state = rememberLazyListState(),
                         modifier = Modifier
@@ -103,10 +107,17 @@ fun SearchScreen(
                 }
             }
             Status.LOADING -> {
-                Text(text = "Loading...")
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    LoadingAnimation()
+                }
             }
             Status.ERROR -> {
-                resource!!.message?.let { Text(text = it) }
+                val message = resource!!.message
+
             }
             else -> {
                 Text(text = "Search for your favourite books here")

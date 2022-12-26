@@ -36,7 +36,7 @@ class MainViewModelTest {
         viewModel.searchBookByTitle("")
         val value = viewModel.books.getOrAwaitValueTest()
 
-        assertThat(value.getContentIfNotHandled()?.status).isEqualTo(Status.ERROR)
+        assertThat(value.status).isEqualTo(Status.ERROR)
     }
 
     @Test
@@ -49,7 +49,7 @@ class MainViewModelTest {
         viewModel.searchBookByTitle(bookName = string)
         val value = viewModel.books.getOrAwaitValueTest()
 
-        assertThat(value.getContentIfNotHandled()?.status).isEqualTo(Status.ERROR)
+        assertThat(value.status).isEqualTo(Status.ERROR)
     }
 
     @Test
@@ -57,7 +57,7 @@ class MainViewModelTest {
         viewModel.searchBookByTitle(bookName = "Github")
         val value = viewModel.books.getOrAwaitValueTest()
 
-        assertThat(value.getContentIfNotHandled()?.status).isEqualTo(Status.SUCCESS)
+        assertThat(value.status).isEqualTo(Status.SUCCESS)
     }
 
     @Test
