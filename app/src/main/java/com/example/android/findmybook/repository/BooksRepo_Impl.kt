@@ -34,10 +34,10 @@ class BooksRepo_Impl @Inject constructor(
                     Resource.success(it)
                 } ?: Resource.error("Response body null",null)
             }else{
-                Resource.error("Not successfully response",null)
+                Resource.error("Not successful response",null)
             }
         } catch (e:Exception){
-            Resource.error("Some exception occurred ${e.cause}",null)
+            Resource.error("No Internet",null)
         }
     }
 
