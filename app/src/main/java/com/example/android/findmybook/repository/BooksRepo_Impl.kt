@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import com.example.android.findmybook.data.local.BookDao
 import com.example.android.findmybook.data.local.BookEntity
 import com.example.android.findmybook.data.remote.NetworkService
-import com.example.android.findmybook.data.remote.mapper.BookDtoMapper
-import com.example.android.findmybook.data.remote.model.BookSearchResponse
-import com.example.android.findmybook.others.Resource
+import com.example.android.findmybook.data.remote.model.Item
+import com.example.android.findmybook.others.Result
 import javax.inject.Inject
 
 class BooksRepo_Impl @Inject constructor(
@@ -26,18 +25,14 @@ class BooksRepo_Impl @Inject constructor(
         return bookDao.observeAllBookItems()
     }
 
-    override suspend fun searchBookByTitle(title: String): Resource<BookSearchResponse> {
+    override suspend fun searchBookByTitle(title: String, startIndex: Int): Result<List<Item>?> {
         return try{
-            val response = booksApi.searchBookByTitle(title)
-            if(response.isSuccessful){
-                response.body()?.let {
-                    Resource.success(it)
-                } ?: Resource.error("Response body null",null)
-            }else{
-                Resource.error("Not successful response",null)
+            val response = booksApi.searchBookByTitle(title,startIndex)
+            response.items.let {
+                Result.success(it)
             }
         } catch (e:Exception){
-            Resource.error("No Internet",null)
+            Result.error("No Internet", listOf())
         }
     }
 

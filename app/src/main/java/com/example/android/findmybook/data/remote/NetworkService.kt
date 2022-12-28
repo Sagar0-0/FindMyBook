@@ -9,6 +9,7 @@ interface NetworkService {
 
     @GET("volumes")
     suspend fun searchBookByTitle(
-        @Query("q") bookName: String
-    ): Response<BookSearchResponse>
+        @Query("q") bookName: String,
+        @Query("startIndex") startIndex : Int
+    ): BookSearchResponse
 }

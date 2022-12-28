@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.android.findmybook.data.local.BookEntity
 import com.example.android.findmybook.data.remote.model.BookSearchResponse
-import com.example.android.findmybook.others.Resource
+import com.example.android.findmybook.data.remote.model.Item
+import com.example.android.findmybook.others.Result
 
 
 class FakeBooksRepository : BooksRepository{
@@ -33,11 +34,11 @@ class FakeBooksRepository : BooksRepository{
         return observableBookEntity
     }
 
-    override suspend fun searchBookByTitle(title: String): Resource<BookSearchResponse> {
+    override suspend fun searchBookByTitle(title: String, startIndex: Int): Result<List<Item>> {
         return if(shouldReturnNetworkError){
-            Resource.error("ERROR",null)
+            Result.error("ERROR",null)
         }else{
-            Resource.success(BookSearchResponse(listOf(),"",1))
+            Result.success(BookSearchResponse(listOf(),"",1))
         }
     }
 }

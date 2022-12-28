@@ -18,10 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.android.findmybook.R
-import com.example.android.findmybook.data.remote.model.BookSearchResponse
 import com.example.android.findmybook.data.remote.model.Item
-import com.example.android.findmybook.domain.model.Book
-import com.example.android.findmybook.presentation.viewmodels.MainViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)

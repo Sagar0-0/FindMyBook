@@ -138,11 +138,14 @@ dependencies {
     //image
     implementation 'com.github.bumptech.glide:glide:4.14.1'
     kapt 'com.github.bumptech.glide:compiler:4.14.1'
-    implementation "com.google.accompanist:accompanist-systemuicontroller:0.23.1"
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.25.0"
 
     //navigation helper
     implementation 'io.github.raamcosta.compose-destinations:animations-core:1.7.25-beta'
     ksp 'io.github.raamcosta.compose-destinations:ksp:1.7.25-beta'
+
+    //paging
+    implementation("androidx.paging:paging-compose:1.0.0-alpha17")
 }
 
 kapt {

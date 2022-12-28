@@ -6,4 +6,7 @@ object Constants {
     const val MAX_BOOK_TITLE_LENGTH = 20
     const val HOME_SCREEN = "home"
     const val SEARCH_SCREEN = "search"
+    const val STATE_KEY_QUERY = "searchTitle"
+    const val STATE_KEY_PAGE = "pageIndex"
+    const val PAGE_SIZE = 10
 }

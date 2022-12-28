@@ -7,6 +7,7 @@ import com.example.android.findmybook.data.local.BookEntity
 import com.example.android.findmybook.getOrAwaitValueTest
 import com.example.android.findmybook.others.Constants
 import com.example.android.findmybook.others.Status
+import com.example.android.findmybook.presentation.MainViewModel
 import com.example.android.findmybook.repository.FakeBooksRepository
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
